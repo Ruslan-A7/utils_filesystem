@@ -10,14 +10,14 @@
  * 
  * Функція може приймати масив змінних для доступу до них в підключеному файлі!
  */
-function includeFile(string $path, bool $once = false, array $variables = []): mixed {
+function includeFile(string $fileName, bool $once = false, array $variables = []): mixed {
     if (!empty($variables)) {
         extract($variables);
     }
     if ($once !== false) {
-        return include_once $path;
+        return include_once $fileName;
     } else {
-        return include $path;
+        return include $fileName;
     }
 }
 
@@ -32,13 +32,13 @@ function includeFile(string $path, bool $once = false, array $variables = []): m
  * 
  * Функція може приймати масив змінних для доступу до них в підключеному файлі!
  */
-function requireFile(string $path, bool $once = false, array $variables = []): mixed {
+function requireFile(string $fileName, bool $once = false, array $variables = []): mixed {
     if (!empty($variables)) {
         extract($variables);
     }
     if ($once !== false) {
-        return require_once $path;
+        return require_once $fileName;
     } else {
-        return require $path;
+        return require $fileName;
     }
 }
