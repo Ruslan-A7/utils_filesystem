@@ -17,7 +17,7 @@ Licensed under [RA7 Open Free License](https://ra7.iuid.cc/license)
 Утиліти для взаємодії з файловою системою.
 
 Примітки:
-- Використовується семантичне версіонування згідо https://semver.org/lang/uk.
+- Використовується семантичне версіювання згідно https://semver.org/lang/uk.
 
 ## Ліцензія:
 
