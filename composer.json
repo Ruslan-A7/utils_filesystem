@@ -30,6 +30,7 @@
     "autoload": {
         "files": [
             "src/creation.php",
+            "src/deleting.php",
             "src/copying.php",
             "src/search.php",
             "src/include.php"
