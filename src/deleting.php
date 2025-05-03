@@ -9,6 +9,5 @@ function deleteFile(string $fileName): bool {
     if (is_file($fileName)) {
         return unlink($fileName);
     }
-    throw new Exception($fileName . ' не є файлом!');
     return false;
 }
