@@ -2,6 +2,9 @@
 /**
  * Скопіювати файл $from на місце $to.
  * 
+ * Важливо! Всі шляхи вже мають бути нормалізованими згідно роздільника директорій для поточної ОС
+ * (для цього доступні наступні функції: dsNormalize, pathNormalize, pathNormalizePlus з пакету ra7/utils_path-normalize).
+ * 
  * @param string $from файл для копіювання
  * @param string $to скопійований файл
  * @param string|bool $replace визначає необхідність перезапису файла якщо він вже існує
