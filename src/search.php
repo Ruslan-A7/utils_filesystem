@@ -12,7 +12,7 @@
  *
  * @param string $directory початкова директорія для пошуку
  * @param string $pattern шаблон файлів (наприклад, "*.jpg" для пошуку jpg-файлів або "*" для пошуку всіх файлів)
- * @param bool $matchFullPath порівнювати з повним шляхом (true), чи лише з назвою файла (false)
+ * @param bool $matchFullPath порівнювати з повним шляхом (true), чи лише з назвою файлу (false)
  * @return array список знайдених файлів
  */
 function findFilesRecursively(string $directory, string $pattern = '*', bool $matchFullPath = true): array {
@@ -32,7 +32,7 @@ function findFilesRecursively(string $directory, string $pattern = '*', bool $ma
         }
     } else {
         foreach ($iterator as $item) {
-            // Перевіряємо, чи є елемент файлом, та чи відповідає назву файла шаблону
+            // Перевіряємо, чи є елемент файлом, та чи відповідає назва файлу шаблону
             if (is_file($item->getPathname()) && fnmatch($pattern, $item->getFilename())) {
                 $result[] = $item->getPathname();
             }
@@ -53,7 +53,7 @@ function findFilesRecursively(string $directory, string $pattern = '*', bool $ma
  *
  * @param string $directory початкова директорія для пошуку
  * @param string $regex регулярний вираз
- * @param bool $matchFullPath порівнювати з повним шляхом (true), чи лише з назвою файла (false)
+ * @param bool $matchFullPath порівнювати з повним шляхом (true), чи лише з назвою файлу (false)
  * @return array список знайдених файлів
  */
 function findFilesRecursivelyRegex(string $directory, string $regex = '/.*/', bool $matchFullPath = true): array {
@@ -73,7 +73,7 @@ function findFilesRecursivelyRegex(string $directory, string $regex = '/.*/', bo
         }
     } else {
         foreach ($iterator as $item) {
-            // Перевіряємо, чи є елемент файлом, та чи відповідає назву файла регулярному виразу
+            // Перевіряємо, чи є елемент файлом, та чи відповідає назва файлу регулярному виразу
             if (is_file($item->getPathname()) && preg_match($regex, $item->getFilename())) {
                 $result[] = $item->getPathname();
             }
@@ -114,7 +114,7 @@ function findFilesInDirectory(string $directory, string $regex = '/.*/'): array 
 
         // Перевіряємо, чи є елемент файлом, та чи відповідає він регулярному виразу
         if (is_file($fullPath) && preg_match($regex, $item)) {
-            $result[] = $fullPath; // Додаємо повний шлях до файла
+            $result[] = $fullPath; // Додаємо повний шлях до файлу
         }
     }
 

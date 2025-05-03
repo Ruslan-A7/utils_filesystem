@@ -23,7 +23,7 @@ function includeFile(string $path, bool $once = false, array $variables = []): m
 
 /**
  * Підключити файл в режимі require (без передачі другого аргументу)
- * або require_once (пердавши true дргуим аргументом).
+ * або require_once (передавши true другим аргументом).
  * 
  * Важливо! Шлях вже має бути нормалізованим згідно роздільника директорій для поточної ОС
  * (для цього доступні наступні функції: dsNormalize, pathNormalize, pathNormalizePlus з пакету ra7/utils_path-normalize).
