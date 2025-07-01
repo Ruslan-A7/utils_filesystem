@@ -38,6 +38,6 @@
     },
     "require": {
         "php": "^8",
-        "ra7/utils_system": "*"
+        "ra7/utils_normalizers": "*"
     }
 }
