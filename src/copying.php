@@ -2,8 +2,8 @@
 /**
  * Скопіювати файл $from на місце $to.
  *
- * Важливо! У цій функції всі шляхи обробляються функцією `pathNormalize()` з пакету `ra7/utils_normalizers` для їх нормалізації,
- * тому слід використовувати `/` або `\` для розділення директорій.
+ * Важливо! Всі шляхи вже мають бути нормалізованими згідно роздільника директорій для поточної ОС
+ * (для цього призначено функцію `pathNormalize()` та `pathNormalizePlus()` з пакету ra7/utils_normalizers).
  *
  * @param string $from файл для копіювання
  * @param string $to скопійований файл
@@ -16,9 +16,6 @@
  * @throw якщо не вдалося скопіювати файл або файл для копіювання не знайдено
  */
 function copyFile(string $from, string $to, string|bool $replace = 'auto'): bool {
-    $from = pathNormalize($from);
-    $to = pathNormalize($to);
-
     if (file_exists($to) && $replace === false || file_exists($from) && file_exists($to) && is_string($replace) && filemtime($from) < filemtime($to)) {
         return false;
     }

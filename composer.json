@@ -37,7 +37,6 @@
         ]
     },
     "require": {
-        "php": "^8",
-        "ra7/utils_normalizers": "*"
+        "php": "^8"
     }
 }

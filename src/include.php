@@ -3,16 +3,14 @@
  * Підключити файл в режимі include (без передачі другого аргументу або передавши ним `false`)
  * або include_once (передавши `true` другим аргументом).
  *
- * Важливо! У цій функції шлях обробляється функцією `pathNormalize()` з пакету `ra7/utils_normalizers` для його нормалізації,
- * тому слід використовувати `/` або `\` для розділення директорій.
+ * Важливо! Шлях вже має бути нормалізованим згідно роздільника директорій для поточної ОС
+ * (для цього призначено функцію `pathNormalize()` та `pathNormalizePlus()` з пакету `ra7/utils_normalizers`).
  *
  * Рекомендується передавати абсолютний шлях!
  *
  * Функція може приймати масив змінних для доступу до них в підключеному файлі!
  */
 function includeFile(string $path, bool $once = false, array $variables = []): mixed {
-    $path = pathNormalize($path);
-
     if (!empty($variables)) {
         extract($variables);
     }
@@ -28,16 +26,14 @@ function includeFile(string $path, bool $once = false, array $variables = []): m
  * Підключити файл в режимі require (без передачі другого аргументу або передавши ним `false`)
  * або require_once (передавши `true` другим аргументом).
  *
- * Важливо! У цій функції шлях обробляється функцією `pathNormalize()` з пакету `ra7/utils_normalizers` для його нормалізації,
- * тому слід використовувати `/` або `\` для розділення директорій.
+ * Важливо! Шлях вже має бути нормалізованим згідно роздільника директорій для поточної ОС
+ * (для цього призначено функцію `pathNormalize()` та `pathNormalizePlus()` з пакету `ra7/utils_normalizers`).
  *
  * Рекомендується передавати абсолютний шлях!
  *
  * Функція може приймати масив змінних для доступу до них в підключеному файлі!
  */
 function requireFile(string $path, bool $once = false, array $variables = []): mixed {
-    $path = pathNormalize($path);
-
     if (!empty($variables)) {
         extract($variables);
     }

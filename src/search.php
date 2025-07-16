@@ -4,8 +4,8 @@
  *
  * Важливі примітки:
  * - Шлях директорії для пошуку може закінчуватись з або без роздільника директорій
- * - Шлях обробляється функцією `pathNormalize()` з пакету `ra7/utils_normalizers` для його нормалізації,
- *   тому слід використовувати `/` або `\` для розділення директорій
+ * - Шлях вже має бути нормалізованим згідно роздільника директорій для поточної ОС
+ *   (для цього призначено функцію `pathNormalize()` та `pathNormalizePlus()` з пакету `ra7/utils_normalizers`)
  * - Шаблон не обробляється функцією `pathNormalize()`, тому не рекомендується використовувати в ньому вкладеність директорій,
  *   але на крайній випадок краще використовувати `/` для їх розділення
  * - Шаблон в цій функції не підтримує регулярні вирази - детальніше про спосіб визначення шаблону читайте тут:
@@ -18,8 +18,6 @@
  * @return array список знайдених файлів
  */
 function findFilesRecursively(string $directory, string $pattern = '*', bool $matchFullPath = true): array {
-    $directory = pathNormalize($directory);
-
     $result = [];
 
     // Використовуємо RecursiveDirectoryIterator для обходу підпапок
@@ -51,8 +49,8 @@ function findFilesRecursively(string $directory, string $pattern = '*', bool $ma
  *
  * Важливі примітки:
  * - Шлях директорії для пошуку може закінчуватись з або без роздільника директорій
- * - Шлях обробляється функцією `pathNormalize()` з пакету `ra7/utils_normalizers` для його нормалізації,
- *   тому слід використовувати `/` або `\` для розділення директорій
+ * - Шлях вже має бути нормалізованим згідно роздільника директорій для поточної ОС
+ *   (для цього призначено функцію `pathNormalize()` та `pathNormalizePlus()` з пакету `ra7/utils_normalizers`)
  * - Регулярний вираз не обробляється функцією `pathNormalize()`, тому не рекомендується використовувати в ньому вкладеність директорій,
  *   але на крайній випадок краще використовувати `/` для їх розділення
  * - В порівнянні з регулярним виразом бере участь весь шлях до файлу (true) або лише його назва (false) в залежності від значення $matchFullPath
@@ -63,8 +61,6 @@ function findFilesRecursively(string $directory, string $pattern = '*', bool $ma
  * @return array список знайдених файлів
  */
 function findFilesRecursivelyRegex(string $directory, string $regex = '/.*/', bool $matchFullPath = true): array {
-    $directory = pathNormalize($directory);
-
     $result = [];
 
     // Використовуємо RecursiveDirectoryIterator для обходу підпапок
@@ -96,8 +92,8 @@ function findFilesRecursivelyRegex(string $directory, string $regex = '/.*/', bo
  *
  * Важливі примітки:
  * - Шлях директорії для пошуку обов'язково має закінчуватись роздільником директорій!
- * - Шлях обробляється функцією `pathNormalize()` з пакету `ra7/utils_normalizers` для його нормалізації,
- *   тому слід використовувати `/` або `\` для розділення директорій
+ * - Шлях вже має бути нормалізованим згідно роздільника директорій для поточної ОС
+ *   (для цього призначено функцію `pathNormalize()` та `pathNormalizePlus()` з пакету `ra7/utils_normalizers`)
  * - Регулярний вираз не обробляється функцією `pathNormalize()`, тому не рекомендується використовувати в ньому вкладеність директорій,
  *   але на крайній випадок краще використовувати `/` для їх розділення
  * - В порівнянні з регулярним виразом бере участь лише частина шляху, що починається після заданої директорії
@@ -108,8 +104,6 @@ function findFilesRecursivelyRegex(string $directory, string $regex = '/.*/', bo
  * @return array список знайдених файлів
  */
 function findFilesInDirectory(string $directory, string $regex = '/.*/'): array {
-    $directory = pathNormalize($directory);
-
     $result = [];
 
     // Отримуємо список файлів та папок
@@ -140,8 +134,8 @@ function findFilesInDirectory(string $directory, string $regex = '/.*/'): array 
  *
  * Важливі примітки:
  * - Шлях директорії для пошуку може закінчуватись з або без роздільника директорій
- * - Шлях обробляється функцією `pathNormalize()` з пакету `ra7/utils_normalizers` для його нормалізації,
- *   тому слід використовувати `/` або `\` для розділення директорій
+ * - Шлях вже має бути нормалізованим згідно роздільника директорій для поточної ОС
+ *   (для цього призначено функцію `pathNormalize()` та `pathNormalizePlus()` з пакету `ra7/utils_normalizers`)
  * - Регулярний вираз не обробляється функцією `pathNormalize()`, тому не рекомендується використовувати в ньому вкладеність директорій,
  *   але на крайній випадок краще використовувати `/` для їх розділення
  * - В порівнянні з регулярним виразом бере участь весь шлях до файлу
@@ -151,8 +145,6 @@ function findFilesInDirectory(string $directory, string $regex = '/.*/'): array 
  * @return array список знайдених папок
  */
 function findFoldersRecursively(string $directory, string $regex = '/.*/'): array {
-    $directory = pathNormalize($directory);
-
     $result = [];
 
     // Перевірка наявності кореневої папки
@@ -181,8 +173,8 @@ function findFoldersRecursively(string $directory, string $regex = '/.*/'): arra
  *
  * Важливі примітки:
  * - Шлях директорії для пошуку обов'язково має закінчуватись роздільником директорій!
- * - Шлях обробляється функцією `pathNormalize()` з пакету `ra7/utils_normalizers` для його нормалізації,
- *   тому слід використовувати `/` або `\` для розділення директорій
+ * - Шлях вже має бути нормалізованим згідно роздільника директорій для поточної ОС
+ *   (для цього призначено функцію `pathNormalize()` та `pathNormalizePlus()` з пакету `ra7/utils_normalizers`)
  * - Регулярний вираз не обробляється функцією `pathNormalize()`, тому не рекомендується використовувати в ньому вкладеність директорій,
  *   але на крайній випадок краще використовувати `/` для їх розділення
  * - В порівнянні з регулярним виразом бере участь лише частина шляху, що починається після заданої директорії
@@ -193,8 +185,6 @@ function findFoldersRecursively(string $directory, string $regex = '/.*/'): arra
  * @return array список знайдених папок
  */
 function findFoldersInDirectory(string $directory, string $regex = '/.*/'): array {
-    $directory = pathNormalize($directory);
-
     $result = [];
 
     // Перевірка наявності кореневої папки

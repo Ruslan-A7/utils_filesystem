@@ -2,12 +2,15 @@
 /**
  * Створити неіснуючі папки до файлу.
  *
- * Важливо! У цій функції шлях обробляється функцією `pathNormalize()` з пакету `ra7/utils_normalizers` для його нормалізації,
- * тому слід використовувати `/` або `\` для розділення директорій.
+ * Важливо! Шлях вже має бути нормалізованим згідно роздільника директорій для поточної ОС
+ * (для цього призначено функцію `pathNormalize()` та `pathNormalizePlus()` з пакету `ra7/utils_normalizers`).
+ *
+ * Треба передавати шлях до файлу, а не до директорії (ця функція автоматично визначить потрібну директорію).
+ *
+ * Якщо треба створити директорію на основі шляху до директорії - скористайтесь функцією `createEmptyDirsToDir()`.
  */
 function createEmptyDirsToFile(string $path, int $permissions = 0777, bool $recursive = true, $context = null): bool {
-    $path = dirname(pathNormalize($path));
-
+    $path = dirname($path);
     if (!is_dir($path)) {
         return mkdir($path, $permissions, $recursive, $context);
     }
@@ -15,19 +18,35 @@ function createEmptyDirsToFile(string $path, int $permissions = 0777, bool $recu
 }
 
 /**
+ * Створити неіснуючі папки до вказаної папки.
+ *
+ * Важливо! Шлях вже має бути нормалізованим згідно роздільника директорій для поточної ОС
+ * (для цього призначено функцію `pathNormalize()` та `pathNormalizePlus()` з пакету `ra7/utils_normalizers`).
+ *
+ * Треба передавати шлях до кінцевої директорії, а не до файлу.
+ *
+ * Якщо треба створити директорію на основі шляху до файлу - скористайтесь функцією `createEmptyDirsToFile()`.
+ */
+function createEmptyDirsToDir(string $path, int $permissions = 0777, bool $recursive = true, $context = null): bool {
+    if (!is_dir($path)) {
+        return mkdir($path, $permissions, $recursive, $context);
+    }
+    return false;
+}
+
+
+
+/**
  * Створити файл і записати дані в нього з автоматичним створенням неіснуючих папок на шляху.
  *
- * Важливо! У цій функції шлях обробляється функцією `pathNormalize()` з пакету `ra7/utils_normalizers` для його нормалізації,
- * тому слід використовувати `/` або `\` для розділення директорій.
+ * Важливо! Шлях вже має бути нормалізованим згідно роздільника директорій для поточної ОС
+ * (для цього призначено функцію `pathNormalize()` та `pathNormalizePlus()` з пакету `ra7/utils_normalizers`).
  *
- * Всі параметри мають відповідати стандартній функції `file_put_contents`!
+ * Всі параметри мають відповідати стандартній функції `file_put_contents()`!
  */
-function createFile(string $path, mixed $data = '', int $flags = 0, $context): int|bool {
-    $path = pathNormalize($path);
-
+function createFile(string $path, mixed $data = '', int $flags = 0, $context = null): int|bool {
     createEmptyDirsToFile($path);
-
-    if (is_file($path)) {
+    if (!is_file($path)) {
         return file_put_contents($path, $data, $flags, $context) !== false;
     }
     return false;

@@ -2,12 +2,10 @@
 /**
  * Видалити файл.
  *
- * Важливо! У цій функції шлях обробляється функцією `pathNormalize()` з пакету `ra7/utils_normalizers` для його нормалізації,
- * тому слід використовувати `/` або `\` для розділення директорій.
+ * Важливо! Шлях вже має бути нормалізованим згідно роздільника директорій для поточної ОС
+ * (для цього призначено функцію `pathNormalize()` та `pathNormalizePlus()` з пакету `ra7/utils_normalizers`).
  */
 function deleteFile(string $path): bool {
-    $path = pathNormalize($path);
-
     if (is_file($path)) {
         return unlink($path);
     }
