@@ -37,7 +37,7 @@ function createEmptyDirsToDir(string $path, int $permissions = 0777, bool $recur
 
 
 /**
- * Створити файл і записати дані в нього з автоматичним створенням неіснуючих папок на шляху.
+ * Створити файл і записати дані в нього з автоматичним створенням неіснуючих папок на шляху (перезапише або доповнить існуючий файл в залежності від $flags).
  *
  * Важливо! Шлях вже має бути нормалізованим згідно роздільника директорій для поточної ОС
  * (для цього призначено функцію `pathNormalize()` та `pathNormalizePlus()` з пакету `ra7/utils_normalizers`).
@@ -45,8 +45,23 @@ function createEmptyDirsToDir(string $path, int $permissions = 0777, bool $recur
  * Всі параметри мають відповідати стандартній функції `file_put_contents()`!
  */
 function createFile(string $path, mixed $data = '', int $flags = 0, $context = null): int|bool {
-    createEmptyDirsToFile($path);
     if (!is_file($path)) {
+        createEmptyDirsToFile($path);
+    }
+    return file_put_contents($path, $data, $flags, $context) !== false;
+}
+
+/**
+ * Створити файл і записати дані в нього з автоматичним створенням неіснуючих папок на шляху (без його перезапису якщо файл вже існує).
+ *
+ * Важливо! Шлях вже має бути нормалізованим згідно роздільника директорій для поточної ОС
+ * (для цього призначено функцію `pathNormalize()` та `pathNormalizePlus()` з пакету `ra7/utils_normalizers`).
+ *
+ * Всі параметри мають відповідати стандартній функції `file_put_contents()`!
+ */
+function createFileWithoutRewrite(string $path, mixed $data = '', int $flags = 0, $context = null): int|bool {
+    if (!is_file($path)) {
+        createEmptyDirsToFile($path);
         return file_put_contents($path, $data, $flags, $context) !== false;
     }
     return false;
